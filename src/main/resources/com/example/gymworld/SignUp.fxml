@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="Main" prefHeight="569.0" prefWidth="627.0" stylesheets="@CSS/SignUp.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gymworld.SignUpController">
+   <children>
+      <Text fill="WHITE" layoutX="79.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" wrappingWidth="171.0">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Text>
+      <TextField id="t1" fx:id="Name" layoutX="82.0" layoutY="221.0" onMouseClicked="#clear" prefHeight="30.0" prefWidth="230.0" />
+      <TextField id="t2" fx:id="Phone" layoutX="343.0" layoutY="221.0" onMouseClicked="#clear" prefHeight="30.0" prefWidth="229.0" />
+      <TextField id="t3" fx:id="Address" layoutX="79.0" layoutY="287.0" onMouseClicked="#clear" prefHeight="30.0" prefWidth="494.0" />
+      <TextField id="t4" fx:id="Proffesion" layoutX="341.0" layoutY="356.0" onMouseClicked="#clear" prefHeight="30.0" prefWidth="230.0" />
+      <TextField id="t5" fx:id="Dob" layoutX="79.0" layoutY="356.0" onMouseClicked="#clear" prefHeight="30.0" prefWidth="230.0" />
+      <Label id="l1" layoutX="89.0" layoutY="203.0" text="Name" textFill="#eaf6ff">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="89.0" layoutY="266.0" text="Address" textFill="#eaf6ff">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
+      <Label id="l5" layoutX="86.0" layoutY="336.0" text="Date Of Birth" textFill="#eaf6ff">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
+      <Label id="l4" layoutX="345.0" layoutY="336.0" text="Proffession" textFill="#eaf6ff">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
+      <Button id="next" layoutX="90.0" layoutY="495.0" mnemonicParsing="false" onAction="#Submit" prefHeight="30.0" prefWidth="140.0" text="Submit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Text fill="WHITE" layoutX="79.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To be a Member of GYM World. Create an Account Right Now" wrappingWidth="302.33331298828125">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Label id="l1" layoutX="351.0" layoutY="201.0" text="Phone Number" textFill="#eaf6ff">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
+      <Line endX="393.0" layoutX="179.0" layoutY="173.0" startX="-100.0" stroke="WHITE" />
+      <ChoiceBox id="t1" fx:id="Membership" layoutX="79.0" layoutY="426.0" prefHeight="26.0" prefWidth="230.0" />
+      <Label id="l5" fx:id="Membership" layoutX="86.0" layoutY="408.0" text="Membership" textFill="#eaf6ff">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
