@@ -3,17 +3,23 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane fx:id="splitPane" dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gymworld.homeController">
+<SplitPane fx:id="splitPane" dividerPositions="0.2773426167682042" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gymworld.homeController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -21,7 +27,7 @@
          </children></AnchorPane>
     <AnchorPane fx:id="SecondScene" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <AnchorPane fx:id="SignUpMain" prefHeight="398.4" prefWidth="417.6" stylesheets="@CSS/SignUp.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="SignUpMain" layoutY="-1.0" prefHeight="501.6" prefWidth="496.0" stylesheets="@CSS/SignUp.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Text fill="WHITE" layoutX="142.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" wrappingWidth="175.2">
                      <font>
@@ -53,7 +59,7 @@
                         <Font name="System Italic" size="10.0" />
                      </font>
                   </Label>
-                  <Button id="next" layoutX="239.0" layoutY="386.0" mnemonicParsing="false" onAction="#Submit" prefHeight="26.0" prefWidth="134.0" text="Submit" textFill="WHITE">
+                  <Button id="next" fx:id="signUpButton" layoutX="239.0" layoutY="386.0" mnemonicParsing="false" onAction="#Submit" prefHeight="26.0" prefWidth="134.0" text="Submit" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -83,19 +89,164 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="PaymentPage" layoutX="65.0" layoutY="37.0" prefHeight="426.0" prefWidth="351.0">
+            <AnchorPane fx:id="PaymentPage" layoutX="65.0" layoutY="37.0" prefHeight="501.6" prefWidth="496.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="426.4" prefWidth="351.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="358.0" text="Total Payable Amount">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="totalPaymentText" alignment="CENTER" prefHeight="122.0" prefWidth="351.0">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
                         <Label prefHeight="18.0" prefWidth="81.0" text="Member ID :" />
                         <TextField fx:id="MemberIdPayment" prefHeight="26.0" prefWidth="254.0" />
+                        <Label text="Months :" />
+                        <ChoiceBox fx:id="paymentMonth" prefHeight="26.0" prefWidth="355.0" />
                         <Label text="Manager Name :" />
                         <ChoiceBox fx:id="ManagerNamePayment" prefHeight="26.0" prefWidth="352.0" />
-                        <Label text="Months :" />
-                        <ChoiceBox fx:id="PaymentMonth_Admission" prefHeight="26.0" prefWidth="355.0" />
-                        <CheckBox mnemonicParsing="false" text="with Admission" />
+                        <Button mnemonicParsing="false" onAction="#pay" text="Proceed to Payment" />
                      </children>
                   </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="adminLogin" layoutX="43.0" layoutY="37.0" prefHeight="426.0" prefWidth="391.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" layoutY="126.0" prefHeight="18.0" prefWidth="391.0" text="ADMIN  Login">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="77.0" layoutY="204.0" text="Username :" />
+                  <TextField fx:id="adminUsername" layoutX="167.0" layoutY="200.0" />
+                  <Label layoutX="79.0" layoutY="248.0" text="Password :" />
+                  <TextField fx:id="adminPassword" layoutX="167.0" layoutY="244.0" />
+                  <Button layoutX="196.0" layoutY="293.0" mnemonicParsing="false" onAction="#adminLogin" text="Login" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="adminDashboard" prefHeight="501.6" prefWidth="496.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TabPane prefHeight="501.6" prefWidth="481.6" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                      <Tab text="Member List">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView layoutY="42.0" prefHeight="416.0" prefWidth="482.0" AnchorPane.bottomAnchor="-3.599999999999966" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.7999999999999545" AnchorPane.topAnchor="42.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="ID" />
+                                        <TableColumn prefWidth="97.60003662109375" text="Member Name" />
+                                          <TableColumn prefWidth="75.0" text="Active" />
+                                      </columns>
+                                    </TableView>
+                                    <CheckBox layoutX="71.0" layoutY="14.0" mnemonicParsing="false" text="Active" />
+                                    <CheckBox layoutX="162.0" layoutY="15.0" mnemonicParsing="false" text="Inactive" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Manager List">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView layoutY="112.0" prefHeight="472.8" prefWidth="481.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="97.60003280639648" text="Name" />
+                                        <TableColumn prefWidth="159.19996643066406" text="NID" />
+                                          <TableColumn prefWidth="101.60000610351562" text="Address" />
+                                          <TableColumn prefWidth="121.60001220703123" text="Joining Date" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="FingerPrint Remove">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView layoutX="126.0" layoutY="30.0" prefHeight="472.8" prefWidth="496.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="ID" />
+                                        <TableColumn prefWidth="193.6000213623047" text="NAME" />
+                                          <TableColumn prefWidth="120.80001831054688" text="DATE EXPIRED" />
+                                          <TableColumn prefWidth="104.00006103515625" text="REMOVE" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab text="Today">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Pane layoutX="24.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="25.0" layoutY="61.0" prefHeight="114.0" prefWidth="150.0" text="1800">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="23.0" prefHeight="18.0" prefWidth="188.0" text="Total Payment Recieved" />
+                                       </children>
+                                    </Pane>
+                                    <Pane layoutX="248.0" layoutY="36.0" prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="25.0" layoutY="61.0" prefHeight="114.0" prefWidth="150.0" text="5">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="23.0" prefHeight="18.0" prefWidth="188.0" text="NEW MEMBERS" />
+                                       </children>
+                                    </Pane>
+                                    <Pane layoutX="24.0" layoutY="216.0" prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="25.0" layoutY="61.0" prefHeight="114.0" prefWidth="150.0" text="6">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="23.0" prefHeight="18.0" prefWidth="188.0" text="MONTHS PAID" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab text="New Manager">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="472.8" prefWidth="496.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label alignment="CENTER" prefHeight="56.0" prefWidth="378.0" text="NEW MANAGER">
+                                             <font>
+                                                <Font size="29.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" prefHeight="18.0" prefWidth="386.0" text="Manager Name:" />
+                                          <TextField fx:id="addMangerName" promptText="Enter Name here" />
+                                          <Label text="Manager NID:" />
+                                          <TextField fx:id="addManagerNID" promptText="NID Number" />
+                                          <Label text="Address:" />
+                                          <TextField fx:id="addManagerAddress" promptText="Enter the Address" />
+                                          <Label text="Joining Date:" />
+                                          <DatePicker fx:id="addMangerJoinDate" prefHeight="26.0" prefWidth="413.0" promptText="Pick the Joining Date" />
+                                          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="129.0" text="Add Manger" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
                </children>
             </AnchorPane>
          </children></AnchorPane>

@@ -7,13 +7,13 @@ public class ADMIN {
     public static int Membership_Lifetime=1500;
     public static final String Name="GYM WORLD";
 
-    private String password;
+    private static String AdminPassword ="12345";
 
-    public String getPassword() {
-        return password;
+    public static String getAdminPassword() {
+        return AdminPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public static void setAdminPassword(String adminPassword) {
+        AdminPassword = adminPassword;
     }
 }

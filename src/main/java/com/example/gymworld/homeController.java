@@ -1,22 +1,20 @@
 package com.example.gymworld;
 
-import com.example.gymworld.databasefiles.Database;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import models.ADMIN;
 import models.Member;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class homeController implements Initializable {
@@ -26,7 +24,7 @@ public class homeController implements Initializable {
     @FXML
     private SplitPane splitPane;
 
-    private AnchorPane CurrentPane=null;
+    private Pane CurrentPane=null;
 
     //SignUp related variables
     @FXML
@@ -46,8 +44,11 @@ public class homeController implements Initializable {
     @FXML
     private ChoiceBox<String> SignUpMembership;
     String[] Plans={"1 MONTH","6 MONTH","12 MONTH","LIFETIME"};
+    String[] PaymentMonths={"1","2","3","4","5","6"};
+    String[] Services = {"NEW MEMBER","PAYMENT","ID ON/OFF","FINGERPRINT","ADMIN"};
+    Alert alert;
 
-    //
+
     private Stage stage;
     private String currentService;
 
@@ -56,7 +57,6 @@ public class homeController implements Initializable {
     private PreparedStatement preparedStatement=null;
     private ResultSet result=null;
 
-    String[] Services = {"NEW MEMBER","PAYMENT","ID ON/OFF","FINGERPRINT","ADMIN"};
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -91,6 +91,9 @@ public class homeController implements Initializable {
 
         //SIGNUP PAGE:
         SignUpMembership.getItems().addAll(Plans);
+        //PAYMENT PAGE:
+        paymentMonth.getItems().addAll(PaymentMonths);
+        paymentMonth.setOnAction(this::monthChanged);
 
     }
 
@@ -99,13 +102,11 @@ public class homeController implements Initializable {
       Date created-17.03.2024 by Imran
      */
     protected void loadNewMemberPage(){
-        if(CurrentPane!=null){ CurrentPane.setVisible(false);}
-        SignUpMain.setVisible(true);
-        CurrentPane=SignUpMain;
+        changeCurrentPaneTo(SignUpMain);
     }
 
     public void Submit(){
-        Alert alert;
+
         Member newMember;
         if(SignUpID.getText().isEmpty()||
                 SignUpName.getText().isEmpty()||
@@ -154,23 +155,63 @@ public class homeController implements Initializable {
      */
     @FXML
     AnchorPane PaymentPage;
+    @FXML
+    private Label totalPaymentText;
+    @FXML
+    private TextField MemberIdPayment;
+    @FXML
+    private ChoiceBox<String> paymentMonth;
+    @FXML
+    private ChoiceBox<String> ManagerNamePayment;
+    private int payableAmount=0;
+    private int Admission=0;
     private void loadPaymentPage() {
-        if(CurrentPane!=null){ CurrentPane.setVisible(false);}
-        PaymentPage.setVisible(true);
-        CurrentPane=PaymentPage;
+        changeCurrentPaneTo(PaymentPage);
     }
 
-    private void loadAdminPage() {
+    private void monthChanged(ActionEvent event){
+        int months=Integer.parseInt(paymentMonth.getValue());
+        payableAmount=Admission+months*600;
+        totalPaymentText.setText(Integer.toString(payableAmount));
+    }
+    @FXML
+    private void pay(){
 
+    }
+
+
+    @FXML AnchorPane adminLogin;
+    @FXML AnchorPane adminDashboard;
+    @FXML TextField adminUsername;
+    @FXML TextField adminPassword;
+    private void loadAdminPage() {
+        changeCurrentPaneTo(adminLogin);
+    }
+    @FXML
+    private void adminLogin(){
+        if(Objects.equals(adminPassword.getText(), ADMIN.getAdminPassword())) {
+            changeCurrentPaneTo(adminDashboard);
+        } else{
+            alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Error");
+            alert.setContentText("Wrong Username or Password");
+            alert.showAndWait();
+        }
     }
 
     private void loadFingerPrintPage() {
     }
 
     private void loadIdOnOffPage() {
+
     }
 
-
+//Universal functions:
+private void changeCurrentPaneTo(Pane pane){
+    if(CurrentPane!=null){ CurrentPane.setVisible(false);}
+    pane.setVisible(true);
+    CurrentPane=pane;
+}
 
 
 

@@ -12,11 +12,13 @@ public class Database {
     public static String url="jdbc:mysql://localhost:3306/gymworld";
     public static String username="root";
     public static String password="root";
+    public static Connection connection=null;
     public Connection connectDB(){
         try {
             System.out.println("database.java");
             Class.forName("com.mysql.jdbc.Driver");
-            return DriverManager.getConnection(url,username,password);
+            connection= DriverManager.getConnection(url,username,password);
+            return connection;
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert=new Alert(Alert.AlertType.ERROR);
